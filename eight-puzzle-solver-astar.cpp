@@ -5,6 +5,8 @@
 #include <cmath>
 using namespace std;
 
+int nodesExplored = 0;
+
 // Structure to represent a state of the puzzle
 struct State {
     vector<vector<int>> board;
@@ -114,6 +116,7 @@ State* solvePuzzle(vector<vector<int>> initial) {
     initialState->f = initialState->g + initialState->h;
     
     openList.push(initialState);
+    nodesExplored = 1;
     
     while(!openList.empty()) {
         State* current = openList.top();
@@ -136,6 +139,7 @@ State* solvePuzzle(vector<vector<int>> initial) {
             string successorStr = boardToString(successor->board);
             if(!closedList[successorStr]) {
                 openList.push(successor);
+                nodesExplored++;
             }
         }
     }
@@ -145,9 +149,9 @@ State* solvePuzzle(vector<vector<int>> initial) {
 
 int main() {
     vector<vector<int>> initial = {
-        {1, 0, 6},
-        {4, 3, 2},
-        {7, 5, 8}
+        {8, 6, 7},
+        {2, 5, 4},
+        {3, 0, 1}
     };
     
     cout << "Initial state:" << endl;
@@ -159,14 +163,17 @@ int main() {
     }
     cout << "----------------" << endl;
     
+    nodesExplored = 0;  // Reset counter
     State* solution = solvePuzzle(initial);
     
     if(solution != nullptr) {
         cout << "Solution found! \nSteps:" << endl;
         printPath(solution);
         cout << "Number of moves: " << solution->g << endl;
+        cout << "Total nodes explored: " << nodesExplored << endl;
     } else {
         cout << "No solution found!" << endl;
+        cout << "Nodes explored before giving up: " << nodesExplored << endl;
     }
     
     return 0;
