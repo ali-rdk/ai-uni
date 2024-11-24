@@ -103,7 +103,7 @@ void printPath(State* state) {
         }
         cout << endl;
     }
-    cout << "----------------" << endl;
+    cout << endl;
 }
 
 // A* algorithm implementation
@@ -149,9 +149,9 @@ State* solvePuzzle(vector<vector<int>> initial) {
 
 int main() {
     vector<vector<int>> initial = {
-        {8, 6, 7},
-        {2, 5, 4},
-        {3, 0, 1}
+        {1, 2, 3} ,
+        {4, 6, 8}, 
+        {7, 0, 5}
     };
     
     cout << "Initial state:" << endl;
